@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bulma-0.7.1/css/bulma.min.css" %}">
+    <title>FX Report</title>
+  </head>
+  <body>
+    <div>{{title}}</div>
+    <div id="root">
+    </div>
+    <script src="{% static "/dist/bundle.js" %}"></script>
+  </body>
+</html>
