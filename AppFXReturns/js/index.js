@@ -141,7 +141,7 @@ class App extends React.Component {
             style={{ textTransform: 'capitalize' }}>
             {['daily_return', 'rolling_average',
               'rolling_standard_deviation', 'rolling_covariance',
-              'rolling correlation'].map((item) => {
+              'rolling_correlation'].map((item) => {
               return (
                 <option value={item} style={{ textTransform: 'capitalize' }}>
                   {item.replace(/_/g, ' ')}
