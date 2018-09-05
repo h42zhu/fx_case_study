@@ -92,8 +92,17 @@ class App extends React.Component {
         method: 'post',
         body: JSON.stringify(query),
       }))
-      .then(res => res.json)
-      .then(jsonObj => console.log(jsonObj))
+      .then((res) => {
+        if (res.status !== 200) {
+          alert('Error: problem generating the report!')
+        }
+        return res.blob();
+      })
+      .then((blob) => {
+        const newBlob = new Blob([blob], {type: "application/pdf"})
+        const data = window.URL.createObjectURL(newBlob);
+        window.open(data, 'pdf_report');
+      })
   }
 
 

@@ -109,8 +109,6 @@ def gen_report(request):
     file_name = '{report}_{rand}.pdf'.format(report=report, rand=rand_string_generator())
     file_path = os.path.join('Validus/Data/temp', file_name)
 
-    response = HttpResponse()
-
     query = """
     SELECT value_date, base_curr AS currency, fx_rate
     FROM m_fx_rate
@@ -215,10 +213,14 @@ def gen_report(request):
 
     plt.legend(loc='best')
     fig.autofmt_xdate()
+    fig.tight_layout()
     plt.savefig(file_path)
     plt.close()
-    
-    # response['Content-Disposition'] = 'attachment; filename={file_path}'.format(file_path=file_path)
     conn.close()
-    return response
+    
+    with open(file_path, 'rb') as output:
+        response = HttpResponse(output, content_type='application/pdf')
+        response['Content-Disposition'] = 'inline; filename={file_path}'.format(file_path=file_path)
+        
+        return response
 
